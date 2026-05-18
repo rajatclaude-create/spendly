@@ -567,19 +567,26 @@ a { color: inherit; text-decoration: none; }
 
 .footer-links {
     display: flex;
-    gap: 1.25rem;
-    margin-top: 0.6rem;
-    font-size: 0.8rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+    font-size: 1rem;
 }
 
 .footer-links a {
-    color: var(--ink-faint);
+    color: var(--paper);
+    font-weight: 600;
     text-decoration: none;
-    transition: color 0.2s ease;
+    letter-spacing: 0.01em;
+    padding: 0.15rem 0;
+    border-bottom: 1px solid rgba(247, 246, 243, 0.35);
+    transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .footer-links a:hover {
-    color: var(--paper);
+    color: var(--accent-2);
+    border-bottom-color: var(--accent-2);
 }
 
 /* ------------------------------------------------------------------ */
@@ -656,4 +663,91 @@ a { color: inherit; text-decoration: none; }
     .hero { padding: 3rem 1rem 2rem; }
     .mock-stats { grid-template-columns: 1fr; }
     .mock-window { padding: 1rem; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Video modal                                                         */
+/* ------------------------------------------------------------------ */
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.video-modal.is-open {
+    display: flex;
+}
+
+.video-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 15, 15, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    cursor: pointer;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 880px;
+    background: var(--ink);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    overflow: hidden;
+    animation: video-modal-in 0.2s ease-out;
+}
+
+@keyframes video-modal-in {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    color: var(--paper);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.video-modal-close:hover {
+    opacity: 0.7;
+}
+
+.video-modal-frame {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    background: var(--ink);
+}
+
+.video-modal-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media (max-width: 600px) {
+    .video-modal { padding: 1rem; }
+    .video-modal-close { top: -2.25rem; }
 }
